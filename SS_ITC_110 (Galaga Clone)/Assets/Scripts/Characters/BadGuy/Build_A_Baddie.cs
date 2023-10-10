@@ -15,15 +15,14 @@ public class Build_A_Baddie : MonoBehaviour
 
     private void Update()
     {
-        if (Vector3.Distance(this.gameObject.transform.position, badGuyBrain.player.transform.position) <= 2.0f)
-        {
-            Explode();
-        }
     }
 
-    public void Explode()
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        badGuyBrain.player.GetComponent<CharacterBrain>().health--;
-        badGuyBrain.Despawn();
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            badGuyBrain.player.GetComponent<CharacterBrain>().health++;
+            badGuyBrain.Despawn();
+        }
     }
 }
